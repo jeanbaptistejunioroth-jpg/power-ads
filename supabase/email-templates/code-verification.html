@@ -1,0 +1,52 @@
+<!--
+  Modèle d'e-mail VIDSELLA — code de vérification (8 langues, automatique).
+  À coller dans Supabase > Authentication > Emails > Templates :
+    • "Magic link"      → sujet :
+      {{ if eq .Data.locale "en" }}Your VIDSELLA code{{ else if eq .Data.locale "es" }}Tu código de VIDSELLA{{ else if eq .Data.locale "pt" }}Seu código VIDSELLA{{ else if eq .Data.locale "ar" }}رمز VIDSELLA الخاص بك{{ else if eq .Data.locale "de" }}Ihr VIDSELLA-Code{{ else if eq .Data.locale "it" }}Il tuo codice VIDSELLA{{ else if eq .Data.locale "zh" }}您的 VIDSELLA 验证码{{ else }}Votre code VIDSELLA{{ end }}
+    • "Confirm signup"  → même sujet, même contenu
+  {{ .Token }} = code à 6 chiffres. {{ .Data.locale }} = langue enregistrée sur le compte (français par défaut).
+-->
+<!doctype html>
+<html>
+  <body style="margin:0;padding:0;background:#f2f4f8;font-family:Inter,Segoe UI,Helvetica,Arial,sans-serif;color:#0a1a33;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f2f4f8;padding:40px 16px;" {{ if eq .Data.locale "ar" }}dir="rtl"{{ end }}>
+      <tr>
+        <td align="center">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px;background:#ffffff;border:1px solid #dce2ec;border-radius:20px;">
+            <tr>
+              <td style="padding:36px 36px 8px;">
+                <table role="presentation" cellpadding="0" cellspacing="0"><tr>
+                  <td style="background:#1b4fd8;border-radius:9px;width:32px;height:32px;"></td>
+                  <td style="padding:0 10px;font-size:17px;font-weight:600;letter-spacing:-0.01em;">VIDSELLA</td>
+                </tr></table>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:24px 36px 0;">
+                <h1 style="margin:0;font-size:24px;font-weight:600;letter-spacing:-0.02em;">
+                  {{ if eq .Data.locale "en" }}Your verification code{{ else if eq .Data.locale "es" }}Tu código de verificación{{ else if eq .Data.locale "pt" }}Seu código de verificação{{ else if eq .Data.locale "ar" }}رمز التحقق الخاص بك{{ else if eq .Data.locale "de" }}Ihr Bestätigungscode{{ else if eq .Data.locale "it" }}Il tuo codice di verifica{{ else if eq .Data.locale "zh" }}您的验证码{{ else }}Votre code de vérification{{ end }}
+                </h1>
+                <p style="margin:12px 0 0;font-size:15px;line-height:1.6;color:#4a5a73;">
+                  {{ if eq .Data.locale "en" }}Enter this code on VIDSELLA to continue. It expires in 15 minutes.{{ else if eq .Data.locale "es" }}Introduce este código en VIDSELLA para continuar. Caduca en 15 minutos.{{ else if eq .Data.locale "pt" }}Digite este código na VIDSELLA para continuar. Ele expira em 15 minutos.{{ else if eq .Data.locale "ar" }}أدخل هذا الرمز على VIDSELLA للمتابعة. تنتهي صلاحيته خلال 15 دقيقة.{{ else if eq .Data.locale "de" }}Geben Sie diesen Code bei VIDSELLA ein, um fortzufahren. Er läuft in 15 Minuten ab.{{ else if eq .Data.locale "it" }}Inserisci questo codice su VIDSELLA per continuare. Scade tra 15 minuti.{{ else if eq .Data.locale "zh" }}请在 VIDSELLA 上输入此验证码以继续。验证码将在 15 分钟后失效。{{ else }}Saisissez ce code sur VIDSELLA pour continuer. Il expire dans 15 minutes.{{ end }}
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:28px 36px;">
+                <div dir="ltr" style="background:#e3ebff;border-radius:14px;padding:22px;text-align:center;font-size:34px;font-weight:700;letter-spacing:0.35em;color:#1b4fd8;">
+                  {{ .Token }}
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:0 36px 36px;font-size:13px;line-height:1.6;color:#7d8ba1;">
+                {{ if eq .Data.locale "en" }}If you didn't request this code, you can ignore this email: your account stays secure.{{ else if eq .Data.locale "es" }}Si no has solicitado este código, ignora este correo: tu cuenta sigue protegida.{{ else if eq .Data.locale "pt" }}Se você não solicitou este código, ignore este e-mail: sua conta continua protegida.{{ else if eq .Data.locale "ar" }}إذا لم تطلب هذا الرمز، يمكنك تجاهل هذه الرسالة: حسابك يبقى آمنًا.{{ else if eq .Data.locale "de" }}Wenn Sie diesen Code nicht angefordert haben, ignorieren Sie diese E-Mail: Ihr Konto bleibt geschützt.{{ else if eq .Data.locale "it" }}Se non hai richiesto questo codice, ignora questa e-mail: il tuo account resta protetto.{{ else if eq .Data.locale "zh" }}如果您没有申请此验证码，请忽略此邮件：您的账户依然安全。{{ else }}Si vous n'êtes pas à l'origine de cette demande, ignorez cet e-mail : votre compte reste protégé.{{ end }}
+              </td>
+            </tr>
+          </table>
+          <p style="margin:20px 0 0;font-size:12px;color:#7d8ba1;">© VIDSELLA</p>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
